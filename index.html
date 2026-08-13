@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Time Saver — Everything a student needs, in one place</title>
+<meta name="description" content="Student Time Saver is a free all-in-one web app for college and engineering students: CGPA & SGPA calculators, attendance tracker, percentage converter, Pomodoro study timer, unit converter, grade calculator and quick notes.">
+<meta name="keywords" content="CGPA calculator, SGPA calculator, attendance calculator, student tools, pomodoro timer, unit converter, grade calculator">
+<meta name="author" content="Student Time Saver">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Student Time Saver — Everything a student needs, in one place">
+<meta property="og:description" content="Free CGPA, SGPA, attendance, percentage and grade calculators plus a study timer, unit converter and notes — all in one dashboard.">
+<meta property="og:site_name" content="Student Time Saver">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%235b8def%22/><text x=%2250%22 y=%2266%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22monospace%22>S</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ================= HEADER / NAV ================= -->
+<header class="site-header" role="banner">
+  <div class="header-inner">
+    <a href="#home" class="brand" data-route="home" aria-label="Student Time Saver home">
+      <span class="brand-mark" aria-hidden="true">ST</span>
+      <span class="brand-name">Student Time Saver</span>
+    </a>
+
+    <nav class="main-nav" id="mainNav" aria-label="Primary">
+      <a href="#home" data-route="home">Home</a>
+      <a href="#dashboard" data-route="dashboard">Dashboard</a>
+      <a href="#cgpa" data-route="cgpa">CGPA</a>
+      <a href="#sgpa" data-route="sgpa">SGPA</a>
+      <a href="#attendance" data-route="attendance">Attendance</a>
+      <a href="#percentage" data-route="percentage">Percentage</a>
+      <a href="#timer" data-route="timer">Timer</a>
+      <a href="#converter" data-route="converter">Converter</a>
+      <a href="#grade" data-route="grade">Grade</a>
+      <a href="#notes" data-route="notes">Notes</a>
+    </nav>
+
+    <div class="header-actions">
+      <button id="themeToggle" class="icon-btn" type="button" aria-label="Switch to light mode" aria-pressed="false">
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+      <button id="navToggle" class="icon-btn nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main" role="main">
+
+  <!-- ================= HOME ================= -->
+  <section class="page" id="page-home" data-page="home">
+    <div class="hero">
+      <p class="eyebrow">Student Time Saver</p>
+      <h1>Everything a student needs, in one place.</h1>
+      <p class="hero-sub">CGPA, SGPA, attendance and grades — calculated in seconds, saved on your device, ready whenever the semester throws something new at you.</p>
+
+      <form class="search-form" id="searchForm" role="search">
+        <label for="toolSearch" class="visually-hidden">What do you need?</label>
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="search" id="toolSearch" placeholder="What do you need? Try “attendance” or “timer”…" autocomplete="off">
+      </form>
+    </div>
+
+    <section class="tool-section" aria-labelledby="quickAccessHeading">
+      <div class="section-head">
+        <h2 id="quickAccessHeading">Quick access</h2>
+      </div>
+      <div class="card-grid" id="quickAccessGrid"></div>
+    </section>
+
+    <section class="tool-section" aria-labelledby="recentHeading" id="recentSection" hidden>
+      <div class="section-head">
+        <h2 id="recentHeading">Recently used</h2>
+      </div>
+      <div class="card-grid" id="recentGrid"></div>
+    </section>
+
+    <section class="tool-section" aria-labelledby="popularHeading">
+      <div class="section-head">
+        <h2 id="popularHeading">Popular tools</h2>
+      </div>
+      <div class="card-grid" id="popularGrid"></div>
+    </section>
+
+    <blockquote class="quote-card" id="quoteCard">
+      <p id="quoteText">“Discipline is choosing between what you want now and what you want most.”</p>
+    </blockquote>
+  </section>
+
+  <!-- ================= DASHBOARD ================= -->
+  <section class="page" id="page-dashboard" data-page="dashboard" hidden>
+    <div class="page-head">
+      <p class="eyebrow">Overview</p>
+      <h1>Your dashboard</h1>
+      <p class="page-sub">A snapshot of where things stand right now, pulled from what you've saved on this device.</p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <span class="stat-label">Latest CGPA</span>
+        <span class="stat-value mono" id="statCgpa">—</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Attendance</span>
+        <span class="stat-value mono" id="statAttendance">—</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Study sessions completed</span>
+        <span class="stat-value mono" id="statSessions">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Saved notes</span>
+        <span class="stat-value mono" id="statNotes">0</span>
+      </div>
+    </div>
+
+    <div class="section-head"><h2>Quick links</h2></div>
+    <div class="card-grid" id="dashboardLinks"></div>
+  </section>
+
+  <!-- ================= CGPA ================= -->
+  <section class="page" id="page-cgpa" data-page="cgpa" hidden>
+    <div class="page-head">
+      <p class="eyebrow">Calculator</p>
+      <h1>CGPA calculator</h1>
+      <p class="page-sub">Credit-weighted across every semester you add: CGPA = Σ(SGPA × credits) ÷ Σ(credits).</p>
+    </div>
+
+    <form id="cgpaForm" class="tool-card" novalidate>
+      <div id="cgpaRows" class="dynamic-rows"></div>
+      <div class="row-actions">
+        <button type="button" id="cgpaAddRow" class="btn btn-ghost">+ Add semester</button>
+        <button type="button" id="cgpaReset" class="btn btn-text">Reset</button>
+      </div>
+      <p class="field-error" id="cgpaError" role="alert" hidden></p>
+
+      <div class="result-strip">
+        <div>
+          <span class="result-label">Total credits</span>
+          <span class="result-value mono" id="cgpaTotalCredits">0</span>
+        </div>
+        <div>
+          <span class="result-label">Overall CGPA</span>
+          <span class="result-value mono result-hero" id="cgpaResult">0.00</span>
+        </div>
+      </div>
+    </form>
+
+    <details class="explainer">
+      <summary>How is CGPA calculated?</summary>
+      <p>Each semester's SGPA is multiplied by that semester's total credits, all of these are added together, then divided by the total credits across every semester. Semesters with more credits count for more — a heavy semester influences your CGPA more than a light one.</p>
+    </details>
+  </section>
+
+  <!-- ================= SGPA ================= -->
+  <section class="page" id="page-sgpa" data-page="sgpa" hidden>
+    <div class="page-head">
+      <p class="eyebrow">Calculator</p>
+      <h1>SGPA calculator</h1>
+      <p class="page-sub">Add each subject's credits and grade — SGPA = Σ(grade point × credits) ÷ Σ(credits), using the standard 10-point Indian grading scale.</p>
+    </div>
+
+    <form id="sgpaForm" class="tool-card" novalidate>
+      <div id="sgpaRows" class="dynamic-rows"></div>
+      <div class="row-actions">
+        <button type="button" id="sgpaAddRow" class="btn btn-ghost">+ Add subject</button>
+        <button type="button" id="sgpaReset" class="btn btn-text">Reset</button>
+      </div>
+      <p class="field-error" id="sgpaError" role="alert" hidden></p>
+
+      <div class="result-strip">
+        <div>
+          <span class="result-label">Total credits</span>
+          <span class="result-value mono" id="sgpaTotalCredits">0</span>
+        </div>
+        <div>
+          <span class="result-label">SGPA</span>
+          <span class="result-value mono result-hero" id="sgpaResult">0.00</span>
+        </div>
+      </div>
+    </form>
+
+    <details class="explainer">
+      <summary>Grading scale used</summary>
+      <p id="gradeScaleText">O = 10 · A+ = 9 · A = 8 · B+ = 7 · B = 6 · C = 5 · P = 4 · F = 0</p>
+    </details>
+  </section>
+
+  <!-- ================= ATTENDANCE ================= -->
+  <section class="page" id="page-attendance" data-page="attendance" hidden>
+    <div class="page-head">
+      <p class="eyebrow">Calculator</p>
+      <h1>Attendance calculator</h1>
+      <p class="page-sub">Track your percentage against the standard 75% requirement, and see exactly what to do next.</p>
+    </div>
+
+    <form id="attendanceForm" class="tool-card" novalidate>
+      <div class="field-grid">
+        <div class="field">
+          <label for="attTotal">Total classes held</label>
+          <input type="number" id="attTotal" min="0" step="1" inputmode="numeric" required>
+        </div>
+        <div class="field">
+          <label for="attAttended">Classes attended</label>
+          <input type="number" id="attAttended" min="0" step="1" inputmode="numeric" required>
+        </div>
+      </div>
+      <p class="field-error" id="attError" role="alert" hidden></p>
+      <div class="row-actions">
+        <button type="submit" class="btn btn-primary">Calculate</button>
+        <button type="button" id="attReset" class="btn btn-text">Reset</button>
+      </div>
+
+      <div class="result-strip" id="attResultStrip" hidden>
+        <div>
+          <span class="result-label">Classes missed</span>
+          <span class="result-value mono" id="attMissed">0</span>
+        </div>
+        <div>
+          <span class="result-label">Attendance</span>
+          <span class="result-value mono result-hero" id="attPercent">0%</span>
+        </div>
+      </div>
+
+      <p class="status-pill" id="attStatus" hidden></p>
+      <p class="hint" id="attAdvice" hidden></p>
+    </form>
+  </section>
+
+  <!-- ================= PERCENTAGE ================= -->
+  <section class="page" id="page-percentage" data-page="percentage" hidden>
+    <div class="page-head">
+      <p class="eyebrow">Calculator</p>
+      <h1>Percentage tools</h1>
+      <p class="page-sub">Three quick conversions in one place.</p>
+    </div>
+
+    <div class="tool-card">
+      <h2 class="card-title">Marks → Percentage</h2>
+      <div class="field-grid">
+        <div class="field">
+          <label for="pMarksObtained">Marks obtained</label>
+          <input type="number" id="pMarksObtained" min="0" step="any">
+        </div>
+        <div class="field">
+          <label for="pMarksTotal">Total marks</label>
+          <input type="number" id="pMarksTotal" min="0" step="any">
+        </div>
+      </div>
+      <p class="field-error" id="pMarksError" role="alert" hidden></p>
+      <div class="result-strip">
+        <div><span class="result-label">Percentage</span><span class="result-value mono result-hero" id="pMarksResult">—</span></div>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <h2 class="card-title">CGPA → Percentage</h2>
+      <div class="field-grid">
+        <div class="field">
+          <label for="pCgpaInput">CGPA (out of 10)</label>
+          <input type="number" id="pCgpaInput" min="0" max="10" step="any">
+        </div>
+      </div>
+      <p class="field-error" id="pCgpaError" role="alert" hidden></p>
+      <p class="hint">Uses the common formula: Percentage = CGPA × 9.5</p>
+      <div class="result-strip">
+        <div><span class="result-label">Percentage</span><span class="result-value mono result-hero" id="pCgpaResult">—</span></div>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <h2 class="card-title">Percentage → Marks</h2>
+      <div class="field-grid">
+        <div class="field">
+          <label for="pPercentInput">Percentage</label>
+          <input type="number" id="pPercentInput" min="0" max="100" step="any">
+        </div>
+        <div class="field">
+          <label for="pPercentTotal">Total marks</label>
+          <input type="number" id="pPercentTotal" min="0" step="any">
+        </div>
+      </div>
+      <p class="field-error" id="pPercentError" role="alert" hidden></p>
+      <div class="result-strip">
+        <div><span class="result-label">Marks</span><span class="result-value mono result-hero" id="pPercentResult">—</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TIMER ================= -->
+  <section class="page" id="page-timer" data-page="timer" hidden>
+    <div class="page-head">
+      <p class="eyebrow">Focus</p>
+      <h1>Study timer</h1>
+      <p class="page-sub">Pomodoro-style focus sessions. Notifications need your permission — the browser will ask once.</p>
+    </div>
+
+    <div class="tool-card timer-card">
+      <div class="timer-modes" role="tablist" aria-label="Timer mode">
+        <button type="button" class="mode-btn is-active" data-mode="study" data-minutes="25" role="tab" aria-selected="true">Study · 25m</button>
+        <button type="button" class="mode-btn" data-mode="short" data-minutes="5" role="tab" aria-selected="false">Short break · 5m</button>
+        <button type="button" class="mode-btn" data-mode="long" data-minutes="15" role="tab" aria-selected="false">Long break · 15m</button>
+      </div>
+
+      <div class="timer-display mono" id="timerDisplay" aria-live="polite">25:00</div>
+
+      <div class="row-actions timer-actions">
+        <button type="button" class="btn btn-primary" id="timerStart">Start</button>
+        <button type="button" class="btn btn-ghost" id="timerPause" disabled>Pause</button>
+        <button type="button" class="btn btn-text" id="timerReset">Reset</button>
+      </div>
+
+      <div class="field custom-timer">
+        <label for="timerCustom">Custom minutes</label>
+        <div class="inline-field">
+          <input type="number" id="timerCustom" min="1" max="180" step="1" placeholder="e.g. 45">
+          <button type="button" class="btn btn-ghost" id="timerCustomSet">Set</button>
+        </div>
+      </div>
+
+      <div class="result-strip">
+        <div><span class="result-label">Sessions completed</span><span class="result-value mono" id="timerSessions">0</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONVERTER ================= -->
+  <section class="page" id="page-converter" data-page="converter" hidden>
+    <div class="page-head">
+      <p class="eyebrow">Utility</p>
+      <h1>Unit converter</h1>
+      <p class="page-sub">Length, weight, temperature, time, data, speed, area and energy.</p>
+    </div>
+
+    <div class="tool-card">
+      <div class="field">
+        <label for="convCategory">Category</label>
+        <select id="convCategory">
+          <option value="length">Length</option>
+          <option value="weight">Weight</option>
+          <option value="temperature">Temperature</option>
+          <option value="time">Time</option>
+          <option value="data">Data storage</option>
+          <option value="speed">Speed</option>
+          <option value="area">Area</option>
+          <option value="energy">Energy</option>
+        </select>
+      </div>
+
+      <div class="field-grid converter-grid">
+        <div class="field">
+          <label for="convValue">Value</label>
+          <input type="number" id="convValue" step="any" value="1">
+        </div>
+        <div class="field">
+          <label for="convFrom">From</label>
+          <select id="convFrom"></select>
+        </div>
+        <div class="field">
+          <label for="convTo">To</label>
+          <select id="convTo"></select>
+        </div>
+      </div>
+
+      <button type="button" id="convSwap" class="btn btn-ghost">⇅ Swap units</button>
+
+      <div class="result-strip">
+        <div><span class="result-label">Result</span><span class="result-value mono result-hero" id="convResult">—</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= GRADE ================= -->
+  <section class="page" id="page-grade" data-page="grade" hidden>
+    <div class="page-head">
+      <p class="eyebrow">Calculator</p>
+      <h1>Grade calculator</h1>
+      <p class="page-sub">Enter marks to get a percentage, letter grade and description. The scale is easy to edit in <code>script.js</code>.</p>
+    </div>
+
+    <form id="gradeForm" class="tool-card" novalidate>
+      <div class="field-grid">
+        <div class="field">
+          <label for="gradeObtained">Marks obtained</label>
+          <input type="number" id="gradeObtained" min="0" step="any" required>
+        </div>
+        <div class="field">
+          <label for="gradeTotal">Total marks</label>
+          <input type="number" id="gradeTotal" min="0" step="any" required>
+        </div>
+      </div>
+      <p class="field-error" id="gradeError" role="alert" hidden></p>
+      <div class="row-actions">
+        <button type="submit" class="btn btn-primary">Calculate grade</button>
+        <button type="button" id="gradeReset" class="btn btn-text">Reset</button>
+      </div>
+
+      <div class="result-strip" id="gradeResultStrip" hidden>
+        <div><span class="result-label">Percentage</span><span class="result-value mono" id="gradePercentResult">—</span></div>
+        <div><span class="result-label">Grade</span><span class="result-value mono result-hero" id="gradeLetterResult">—</span></div>
+      </div>
+      <p class="hint" id="gradeDescResult"></p>
+    </form>
+  </section>
+
+  <!-- ================= NOTES ================= -->
+  <section class="page" id="page-notes" data-page="notes" hidden>
+    <div class="page-head">
+      <p class="eyebrow">Capture</p>
+      <h1>Quick notes</h1>
+      <p class="page-sub">Saved to this browser only — nothing leaves your device.</p>
+    </div>
+
+    <div class="tool-card">
+      <label for="noteInput" class="visually-hidden">New note</label>
+      <textarea id="noteInput" rows="3" placeholder="Write a quick note…"></textarea>
+      <div class="row-actions">
+        <button type="button" id="noteAdd" class="btn btn-primary">Add note</button>
+      </div>
+    </div>
+
+    <div class="field notes-search">
+      <label for="noteSearch" class="visually-hidden">Search notes</label>
+      <input type="search" id="noteSearch" placeholder="Search notes…">
+    </div>
+
+    <ul class="notes-list" id="notesList" aria-live="polite"></ul>
+    <p class="empty-state" id="notesEmpty" hidden>No notes yet — add one above.</p>
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="brand-mark" aria-hidden="true">ST</span>
+      <p>Student Time Saver — everything a student needs, in one place.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h3>About</h3>
+        <p>A free, offline-friendly toolkit built for college and engineering students. No sign-up, no backend — everything is calculated and stored right in your browser.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Tools</h3>
+        <a href="#cgpa" data-route="cgpa">CGPA calculator</a>
+        <a href="#sgpa" data-route="sgpa">SGPA calculator</a>
+        <a href="#attendance" data-route="attendance">Attendance calculator</a>
+        <a href="#timer" data-route="timer">Study timer</a>
+      </div>
+      <div class="footer-col">
+        <h3>Privacy</h3>
+        <p>Student Time Saver stores your data using localStorage on your own device only. Nothing is uploaded, tracked or shared with anyone.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <p>Found a bug or have an idea? Open an issue on the project's GitHub repository.</p>
+      </div>
+    </div>
+    <p class="footer-bottom">© <span id="footerYear"></span> Student Time Saver. Built for students, by students.</p>
+    <p class="footer-credit">
+  🐎 Designed & Developed by <strong>Sudheer Lalam</strong>
+
+  <span class="social-links">
+    <a href="https://www.github.com/SudheerLalam" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+      <i class="fa-brands fa-github"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/in/manikanta-sai-sudheer-lalam-b95637299" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+      <i class="fa-brands fa-linkedin"></i>
+    </a>
+  </span>
+</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
