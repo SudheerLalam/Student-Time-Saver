@@ -400,3 +400,32 @@ select{ appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns
     opacity: 1;
   }
 }
+html,
+body {
+  width: 100%;
+  min-width: 100%;
+  margin: 0;
+}
+
+.site-header,
+.header-inner,
+main,
+.site-footer {
+  width: 100%;
+}
+
+main {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (max-width: 860px) {
+  .header-inner,
+  main {
+    width: 100%;
+  }
+
+  main {
+    max-width: 100%;
+  }
+}
