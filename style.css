@@ -385,47 +385,27 @@ select{ appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns
 @media (prefers-reduced-motion: reduce){
   *{ animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 }
+/* MOBILE PAGE WIDTH FIX */
 @media (max-width: 860px) {
-  .main-nav {
-    transform: translateX(100%) !important;
-    visibility: hidden;
-    pointer-events: none;
-    opacity: 0;
+  html,
+  body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
   }
 
-  .main-nav.is-open {
-    transform: translateX(0) !important;
-    visibility: visible;
-    pointer-events: auto;
-    opacity: 1;
+  .site-header,
+  .site-footer {
+    width: 100% !important;
   }
-}
-html,
-body {
-  width: 100%;
-  min-width: 100%;
-  margin: 0;
-}
 
-.site-header,
-.header-inner,
-main,
-.site-footer {
-  width: 100%;
-}
-
-main {
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-}
-@media (max-width: 860px) {
-  .header-inner,
-  main {
-    width: 100%;
+  .header-inner {
+    width: 100% !important;
+    max-width: 1240px;
   }
 
   main {
-    max-width: 100%;
+    width: 100% !important;
+    max-width: 900px;
   }
 }
